@@ -1,5 +1,7 @@
 import QtQuick
 import Quickshell
+import Quickshell.Services.SystemTray
+import Quickshell.DBusMenu
 
 Rectangle {
     id: menuTrigger
@@ -36,7 +38,39 @@ Rectangle {
              anchors.fill: parent
              radius: 20
              color: "#88ffffff"
+             Tray {
+                id:tray
+                anchors.top: parent.top
+                anchors.topMargin: 10
+                anchors.left: parent.left
+                anchors.leftMargin:12
+                anchors.centerIn: parent.centerIn
+             }
+             Rectangle {
+                implicitHeight: 1
+                implicitWidth: 288
+                anchors.centerIn: parent.centerIn
+                anchors.left: parent.left
+                anchors.leftMargin: 6
+                anchors.top: parent.top
+                anchors.topMargin: 50
+             }
 
+
+             User {
+                anchors.top: parent.top
+                anchors.topMargin: tray.anchors.topMargin + 50
+                anchors.centerIn: parent.centerIn
+                anchors.left: tray.anchors.left
+                anchors.leftMargin: tray.anchors.leftMargin
+
+                  
+
+             }
+             Music {
+                anchors.top: parent.top
+                anchors.topMargin: 200
+             }
             }
     }
 }
