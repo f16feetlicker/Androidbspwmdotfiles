@@ -1,27 +1,43 @@
 import QtQuick
 import Quickshell
 import Quickshell.Hyprland 
-
+import QtQuick.Layouts
      
     
 Row {
-     spacing: 5
+        
+    spacing: 4
+        Repeater {
+            model: 5
 
-    Repeater {
-        model: Hyprland.workspaces
-        delegate: Rectangle{
-            id: workspace
-            width: 15
-            height: 15
-            radius: 7.5
-            color: modelData.id===Hyprland.focusedWorkspace.id
-                   ? "#ffffff"
-                   : "transparent"
-            border.color: "#000000"
-            border.width: 2
+            Rectangle {
+                property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
+                property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
+                border.color: isActive ? "Theme.orange" : (ws ? "blue" : "black")
+                border.width: 2
+                Behavior on color {
+                    ColorAnimation { duration: 200 }
                 }
-            
-            
+                Behavior on border.color {
+                    ColorAnimation { duration : 200 }
+                }
+               
+                color: isActive ? Theme.orange : Theme.coldgray
+                width: isActive ? 40 : 30
+                height: 15
+                radius: 10
+                Behavior on width {
+                    NumberAnimation {
+                        duration: 150
+                        easing.type:Easing.InOutQuads
+                    }
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: Hyprland.dispatch("workspace " + (index + 1))
+                }
+            }
+        }
+
+        Item { Layout.fillWidth: true }
     }
-}
-    

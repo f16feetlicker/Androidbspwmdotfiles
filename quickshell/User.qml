@@ -4,8 +4,11 @@ import Quickshell.Widgets
 import QtQuick.Layouts
 import Quickshell.Io
 
+
 Rectangle {
-    width: 170
+    property string host
+    property string user
+    width: 280
     height: 60
     radius: 7
     Row {
@@ -34,25 +37,32 @@ Rectangle {
             }
         
         }
+       Process {
+        command: ["whoami"]
+        running: true
+        stdout: SplitParser {
+          onRead: data => { if (user === "" ) user = data } 
+        }
+      }
+      Process {
+        command: ["hostname"]
+        running: true
+        stdout: SplitParser {
+          onRead: data =>  { if ( host === "" ) host = data }
+        }
+      } 
      Text {
         id: username
-        text: ""
+        text: " : " + user + "@" + host
         font.family: "JetBrainsMono Nerd Font"
         font.pixelSize: 20
         anchors.left: parent.left
         anchors.leftMargin: 70
         anchors.top: parent.top 
         anchors.topMargin: 10
+        color: "black"
        
-      }   
-     Process {
-        command: ["whoami"]
-        running: true
-        stdout: SplitParser {
-          onRead: data => username.text = ":  " +   data
-        }
-      }
-    
+      }    
     }
 
 }

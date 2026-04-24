@@ -4,6 +4,9 @@ import Quickshell.Services.SystemTray
 import Quickshell.DBusMenu
 
 Rectangle {
+   required property Item barid
+   property bool isVisible
+   property bool isPopvisible
     id: menuTrigger
     height: 22
     width: 26
@@ -21,23 +24,49 @@ Rectangle {
     }
     TapHandler {
         
-        onTapped: popup.visible = !popup.visible
+        onTapped: if (isPopvisible) {
+         closeTimer.start()
+         isVisible = false
+        }
+        else {
+         isPopvisible = true
+         isVisible = true
+        }
         
     }
-    
+    Timer {
+      id: closeTimer
+      running: false
+      interval: 550
+      onTriggered: isPopvisible = false
+    }
     PopupWindow {
+    
     id: popup
-    height: 500
+    height: 300
+   
     width: 300
     color: "transparent"
-    visible: false
-    anchor.item: menuTrigger
+    visible: isPopvisible
+    anchor.item: barid
     anchor.edges: Edges.Bottom | Edges.left
-    anchor.gravity: Edges.Bottom
+    anchor.gravity: Edges.Bottom | Edges.left
          Rectangle {
-             anchors.fill: parent
+             width: 300
+             height: isVisible ? 225 : 2
+             Behavior on height {
+               NumberAnimation { 
+                  duration: 450
+                  easing.type: Easing.InOutQuad
+               }
+             }
+             clip: true
              radius: 20
              color: "#88ffffff"
+             opacity: isVisible ? 1 : 0
+             Behavior on opacity {
+               NumberAnimation { duration: 500 }
+             }
              Tray {
                 id:tray
                 anchors.top: parent.top
@@ -67,10 +96,7 @@ Rectangle {
                   
 
              }
-             Music {
-                anchors.top: parent.top
-                anchors.topMargin: 200
-             }
+           
             }
     }
 }
