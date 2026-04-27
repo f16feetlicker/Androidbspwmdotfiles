@@ -25,7 +25,7 @@ Rectangle {
             delegate: Rectangle {
                 implicitHeight: 23
                 implicitWidth: 23
-                color: "gray"
+                color: "transparent"
                 radius: 2
                 
 

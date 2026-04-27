@@ -43,12 +43,12 @@ import Quickshell.Io
         interval: 100000
         running: true
         
-        onTriggered: date.text = Qt.formatDateTime(new date(), "dd, ") + timeText + Qt.formatDateTime(new Date(), "yyyy")
+        onTriggered: date.text = Qt.formatDateTime(new Date(), "dd, ") + timeText + Qt.formatDateTime(new Date(), "yyyy")
     }
         Timer {
             interval: 1000
             running: true
-            onTriggered: hour.text = Qt.formatDateTime(new date(),"HH:mm")
+            onTriggered: hour.text = Qt.formatDateTime(new Date(),"HH:mm")
 
         }
     Process {

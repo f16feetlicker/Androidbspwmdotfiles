@@ -53,7 +53,7 @@ Rectangle {
     anchor.gravity: Edges.Bottom | Edges.left
          Rectangle {
              width: 300
-             height: isVisible ? 225 : 2
+             height: isVisible ? 300 : 2
              Behavior on height {
                NumberAnimation { 
                   duration: 450
@@ -87,21 +87,18 @@ Rectangle {
 
 
              User {
+                id: user
                 anchors.top: parent.top
                 anchors.topMargin: tray.anchors.topMargin + 50
-                anchors.centerIn: parent.centerIn
+                
                 anchors.left: tray.anchors.left
                 anchors.leftMargin: tray.anchors.leftMargin
-
-                  
-
              }
-           
+            Wifi {
+               anchors.bottom: parent.bottom
+               
             }
-    }
+           
+      }
+   }
 }
-
-
-
-
-

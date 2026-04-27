@@ -1,0 +1,64 @@
+configuration {
+      display-drun: "Apps: ";
+      display-window: "open";
+      show-icons: true;
+      icon-theme: "Papirus";
+      font: "Agave Nerd Font";
+      backgorund-color: @bgcolor;
+}
+ @theme "/dev/null"
+*{
+  bgcolor: #1a1a2e;
+  fgcolor: #b0b8c1;
+  crimson: #c0392b;
+  orange: #d4600a;
+}
+window {
+     width: 30%;
+     border-radius: 12px;
+     background-color: @bgcolor;
+     children: [ mainbox ];
+}
+mainbox {
+     background-color: @bgcolor;
+     
+}
+inputbar {
+    color: @orange;
+    padding: 20px;
+    background-color: @bgcolor;
+}
+prompt {
+    color: @orange;
+    background-color: @bgcolor;
+}
+entry {
+    color: @orange;
+    background-color: @bgcolor;
+}
+#ns {
+   background-color: @bgcolor;
+}
+listview {
+   background-color: @bgcolor;
+   lines: 6;
+}
+element {
+   padding: 10px;
+   background-color: @crimson;
+}
+element-text {
+   background-color: inherit;
+   text-color: inherit;
+}
+element-icon {
+   background-color: inherit;
+   size: 30;
+}
+
+element normal active {
+   background-color: @fgcolor;
+}
+element selected.normal {
+   background-color: @fgcolor;
+}
